@@ -5,11 +5,11 @@ using System.Text;
 
 namespace GameDemo
 {
-    public interface IBaseManager
+    public interface  IBaseManager
     {
         void Add(BaseProperty baseProperty);
         void Update(BaseProperty baseProperty);
         void Delete(BaseProperty baseProperty);
-        List<BaseProperty> List();
+        void List();
     }
 }

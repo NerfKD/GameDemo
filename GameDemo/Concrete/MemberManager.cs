@@ -5,21 +5,23 @@ using System.Text;
 
 namespace GameDemo
 {
-    public class MemberManager : BaseManager
-    {
-        private List<Member> members = new List<Member>() { };
+    public class MemberManager : IBaseManager
+    {   
         private IMemberCheckService _memberCheckService;
-
+        List<Member> members = new List<Member>();
         public MemberManager(IMemberCheckService memberCheckService)
         {
             _memberCheckService = memberCheckService;
         }
-        public override void Add(BaseProperty baseProperty)
+
+       
+
+        public  void Add(BaseProperty baseProperty)
         {
             if (_memberCheckService.CheckIfRealPerson((Member)baseProperty))
             {
-                base.Add((Member)baseProperty);
                 members.Add((Member)baseProperty);
+                Console.WriteLine("Member added : " + baseProperty.Name);
             }
             else
             {
@@ -28,17 +30,26 @@ namespace GameDemo
             
         }
 
-        public override void Delete(BaseProperty baseProperty)
-        {
-            base.Delete(baseProperty);
+        public  void Delete(BaseProperty baseProperty)
+        {  
             members.Remove((Member)baseProperty);
-            
+            Console.WriteLine("Member deleted : " + baseProperty.Name);
         }
 
-        public override void Update(BaseProperty baseProperty)
+        public  void List()
         {
-            base.Update(baseProperty);
-            foreach (var item in members)
+            foreach (Member item in members)
+            {
+                Console.WriteLine("Id: " + item.Id + " // Name: " + item.Name + " // LastName: " + item.LastName);
+            }
+        }
+
+        
+
+
+        public  void Update(BaseProperty baseProperty)
+        {
+            foreach (Member item in members)
             {
                 if (baseProperty.Id == item.Id)
                 {
@@ -50,12 +61,8 @@ namespace GameDemo
                     break;
                 }
             }
-            
+            Console.WriteLine("Member updated : " + baseProperty.Name);
         }
 
-        public override List<Member> List()
-        {
-            return members;
-        }
     }
 }

@@ -11,5 +11,6 @@ namespace GameDemo
         public string NickName { get; set; }
         public string NationalityId { get; set; }
         public DateTime DateOfBirth { get; set; }
+
     }
 }
